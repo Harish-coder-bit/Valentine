@@ -6,11 +6,11 @@ import DayCard from "@/components/DayCard";
 import FloatingPetals from "@/components/FloatingPetals";
 
 function isUnlocked(dateStr: string): boolean {
-  return true; // TODO: restore date logic before going live
-  // const today = new Date();
-  // today.setHours(0, 0, 0, 0);
-  // const unlockDate = new Date(dateStr + "T00:00:00");
-  // return today >= unlockDate;
+  // return true; // TODO: restore date logic before going live
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const unlockDate = new Date(dateStr + "T00:00:00");
+  return today >= unlockDate;
 }
 
 export default function Home() {
@@ -55,7 +55,7 @@ export default function Home() {
             transition={{ delay: 0.5 }}
           >
             A little something I made just for you, Pathure. Each day holds a piece of my
-            heart. Unlock them one by one, my love. &#x2014; Your Rishh
+            heart. Unlock them one by one, my love. &#x2014; Your Harish..
           </motion.p>
 
           {/* Progress indicator */}
