@@ -104,7 +104,7 @@ export default function DayPage() {
       <FloatingHearts count={isValentineDay ? 25 : 12} />
 
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Top Navigation */}
+        {/* Top Navigations */}
         <motion.nav
           className="flex items-center justify-between px-4 sm:px-8 py-4"
           initial={{ opacity: 0, y: -20 }}
