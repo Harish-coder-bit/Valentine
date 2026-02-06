@@ -93,7 +93,7 @@ export default function DayPage() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {/* Backgrounds */}
+      {/* Background */}
       <div
         className={`fixed inset-0 bg-gradient-to-br ${day.bgGradient} transition-colors duration-1000`}
       />
