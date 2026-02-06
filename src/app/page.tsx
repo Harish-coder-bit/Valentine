@@ -1,65 +1,120 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import valentines from "@/data/valentines.json";
+import DayCard from "@/components/DayCard";
+import FloatingPetals from "@/components/FloatingPetals";
+
+function isUnlocked(dateStr: string): boolean {
+  return true; // TODO: restore date logic before going live
+  // const today = new Date();
+  // today.setHours(0, 0, 0, 0);
+  // const unlockDate = new Date(dateStr + "T00:00:00");
+  // return today >= unlockDate;
+}
 
 export default function Home() {
+  const unlockedCount = valentines.filter((v) => isUnlocked(v.date)).length;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="relative min-h-screen overflow-hidden">
+      {/* Background gradient layers */}
+      <div className="fixed inset-0 bg-gradient-to-br from-pink-50 via-rose-50 to-purple-50" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(251,113,133,0.15),_transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(167,139,250,0.1),_transparent_50%)]" />
+
+      <FloatingPetals count={15} />
+
+      <div className="relative z-10 px-4 py-8 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.header
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="text-5xl sm:text-6xl mb-4"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            &#x1f495;
+          </motion.div>
+
+          <h1 className="text-3xl sm:text-5xl font-bold text-gray-800 mb-3">
+            <span className="shimmer-text">Valentine Week</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <h2 className="text-xl sm:text-2xl font-medium text-pink-400 mb-2">
+            Love Calendar
+          </h2>
+
+          <motion.p
+            className="text-gray-500 text-sm sm:text-base max-w-md mx-auto mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            A little something I made just for you, Pathure. Each day holds a piece of my
+            heart. Unlock them one by one, my love. &#x2014; Your Rishh
+          </motion.p>
+
+          {/* Progress indicator */}
+          <motion.div
+            className="mt-6 flex items-center justify-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            <div className="flex gap-1.5">
+              {valentines.map((v, i) => (
+                <motion.div
+                  key={v.id}
+                  className={`w-2.5 h-2.5 rounded-full ${
+                    isUnlocked(v.date)
+                      ? "bg-gradient-to-r from-pink-400 to-rose-500"
+                      : "bg-gray-200"
+                  }`}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 1 + i * 0.1 }}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-gray-400 ml-2">
+              {unlockedCount}/8 unlocked
+            </span>
+          </motion.div>
+        </motion.header>
+
+        {/* Card Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pb-12">
+          {valentines.map((day, index) => (
+            <DayCard
+              key={day.id}
+              id={day.id}
+              dayName={day.dayName}
+              emoji={day.emoji}
+              title={day.title}
+              date={day.date}
+              gradient={day.gradient}
+              isUnlocked={isUnlocked(day.date)}
+              index={index}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
-    </div>
+
+        {/* Footer */}
+        <motion.footer
+          className="text-center pb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          <p className="text-sm text-pink-300">
+            Made with &#x2764;&#xfe0f; by Rishh, for his Pathure
+          </p>
+        </motion.footer>
+      </div>
+    </main>
   );
 }

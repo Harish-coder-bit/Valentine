@@ -1,26 +1,95 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Romantic base styles */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #fdf2f8, #fce7f3, #fdf2f8, #f5f3ff);
+  min-height: 100vh;
+}
+
+/* Custom scrollbar with romantic colors */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf2f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f9a8d4, #f472b6);
+  border-radius: 999px;
+}
+
+/* Glow animation */
+@keyframes romantic-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(244, 114, 182, 0.3), 0 0 40px rgba(244, 114, 182, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(244, 114, 182, 0.5), 0 0 60px rgba(244, 114, 182, 0.2);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.romantic-glow {
+  animation: romantic-glow 3s ease-in-out infinite;
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.05); }
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Soft text glow */
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(244, 114, 182, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(244, 114, 182, 0.7), 0 0 40px rgba(244, 114, 182, 0.3);
+  }
+}
+
+.text-glow {
+  animation: text-glow 3s ease-in-out infinite;
+}
+
+/* Valentine special shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    #f472b6,
+    #e879f9,
+    #f9a8d4,
+    #e879f9,
+    #f472b6
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(244, 114, 182, 0.3);
+  color: #be185d;
 }
