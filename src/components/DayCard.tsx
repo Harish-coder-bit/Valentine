@@ -72,7 +72,7 @@ export default function DayCard({
       {/* Content */}
       <div className="relative z-20">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-semibold uppercase tracking-widest text-white/80 bg-white/20 px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold uppercase tracking-widest text-black-500 bg-white/20 px-3 py-1 rounded-full">
             {formattedDate}
           </span>
           {!isUnlocked && (

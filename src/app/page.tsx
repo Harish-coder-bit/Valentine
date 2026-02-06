@@ -6,11 +6,11 @@ import DayCard from "@/components/DayCard";
 import FloatingPetals from "@/components/FloatingPetals";
 
 function isUnlocked(dateStr: string): boolean {
-  // return true; // TODO: restore date logic before going live
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const unlockDate = new Date(dateStr + "T00:00:00");
-  return today >= unlockDate;
+  return true; // TODO: restore date logic before going live
+  // const today = new Date();
+  // today.setHours(0, 0, 0, 0);
+  // const unlockDate = new Date(dateStr + "T00:00:00");
+  // return today >= unlockDate;
 }
 
 export default function Home() {
@@ -111,7 +111,7 @@ export default function Home() {
           transition={{ delay: 1.5 }}
         >
           <p className="text-sm text-pink-300">
-            Made with &#x2764;&#xfe0f; by Rishh, for his Pungdi
+            Made with &#x2764;&#xfe0f; by Harish, for his Pungdi
           </p>
         </motion.footer>
       </div>

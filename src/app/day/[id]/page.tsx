@@ -225,7 +225,7 @@ export default function DayPage() {
                   With all my love,
                 </p>
                 <p className="text-pink-500 text-sm mt-1 font-semibold">
-                  Your Rishh &#x2764;&#xfe0f;
+                  Your Harish &#x2764;&#xfe0f;
                 </p>
               </motion.div>
             </motion.div>
