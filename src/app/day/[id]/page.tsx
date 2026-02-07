@@ -8,11 +8,10 @@ import CoupleIllustration from "@/components/CoupleIllustration";
 import Link from "next/link";
 
 function isUnlocked(dateStr: string): boolean {
-  return true; // TODO: restore date logic before going live
-  // const today = new Date();
-  // today.setHours(0, 0, 0, 0);
-  // const unlockDate = new Date(dateStr + "T00:00:00");
-  // return today >= unlockDate;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const unlockDate = new Date(dateStr + "T00:00:00");
+  return today >= unlockDate;
 }
 
 export default function DayPage() {
